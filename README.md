@@ -1,0 +1,1 @@
+Program in the browser console that allows the user to play rock-paper-scissors with a simulated computer opponent.
