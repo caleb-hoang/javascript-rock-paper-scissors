@@ -1,3 +1,15 @@
+const txtbox = document.querySelector("status")
+const btnRock = document.querySelector("rock")
+const btnPaper = document.querySelector("paper")
+const btnScissors = document.querySelector("scissors")
+
+
+// Get the player's input based on the button clicked.
+btnRock.addEventListener("click", judgeRound(0)) // ROCK
+btnPaper.addEventListener("click", judgeRound(1)) // PAPER
+btnScissors.addEventListener("click", judgeRound(2)) // SCISSORS
+
+
 // Get the computer move, but do not reveal it to the player.
 // Returns 0 for rock, 1 for paper, 2 for scissors.
 function computerMove() {
@@ -15,26 +27,10 @@ function computerMove() {
     }
 }
 
-function playerMove() {
-    let response = prompt("Select ROCK, PAPER, or SCISSORS")
 
-    if (response == "ROCK") {
-        console.log("ROCK selected.")
-        return 0;
-    } else if (response == "PAPER") {
-        console.log("PAPER selected.")
-        return 1;
-    } else if (response == "SCISSORS") {
-        console.log("SCISSORS selected.")
-        return 2;
-    }
-
-    console.log("Invalid input; ROCK selected by default.")
-    return 0;
-}
-
-function judgeRound(computer, player) {
-    computer = parseInt(computer)
+// 
+function judgeRound(player) {
+    const computer = parseInt(computerMove())
     player = parseInt(player)
     if (computer == player) {
         console.log("Tie! No points awarded.")
@@ -43,49 +39,19 @@ function judgeRound(computer, player) {
 
     if (player < 2) {
         if (computer == player + 1) {
-            console.log("Computer wins! -1 point deducted.")
+            console.log("Computer wins!")
             return -1;
         } else {
-            console.log("Player wins! +1 point awarded.")
+            console.log("Player wins!")
             return 1;
         }
     } else {
         if (computer == 0) {
-            console.log("Computer wins! -1 point deducted.")
+            console.log("Computer wins!")
             return -1;
         } else {
-            console.log("Player wins! +1 point awarded.")
+            console.log("Player wins!")
             return 1;
         }
     }
 }
-
-function playSet() {
-    console.log("Let the games begin!")
-    let score = 0
-
-    for(let i = 0; i < 5; i++) {
-        console.log("Current score is " + score)
-        let player = playerMove()
-        let computer = computerMove()
-        score += judgeRound(computer, player);
-    }
-    
-    console.log("All rounds complete!")
-    judgeSet(score)
-
-}
-
-function judgeSet(score) {
-    score = parseInt(score)
-    console.log("Final score is " + score)
-    if (score == 0) {
-        console.log("Tie!")
-    } else if (score > 0) {
-        console.log("Player wins!")
-    } else {
-        console.log("Computer wins!")
-    }
-}
-
-playSet()
